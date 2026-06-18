@@ -3,7 +3,7 @@ import { Syne, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import Script from "next/dist/client/script";
+import Script from "next/script";
 
 const syne = Syne({
   subsets: ["latin"],
@@ -65,31 +65,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* <GoogleAnalytics gaId="G-S1FQB759TQ" /> */}
-
-      {/* <!-- Google tag (gtag.js) --> */}
-      <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-S1FQB759TQ"
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
+      <head>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-S1FQB759TQ');
+            gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
           `}
-      </Script>
-
-      {/* <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1FQB759TQ"></script>
-<script>
-  winscriptdow.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-S1FQB759TQ');
-</script> */}
-
+        </Script>
+      </head>
       <body
         className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} bg-black-base text-frost-white antialiased`}
       >
