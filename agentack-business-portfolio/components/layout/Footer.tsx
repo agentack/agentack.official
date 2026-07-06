@@ -1,13 +1,13 @@
-import Link from 'next/link'
-import { Linkedin } from 'lucide-react'
+import Link from "next/link";
+import { Linkedin } from "lucide-react";
 
-const CURRENT_YEAR = new Date().getFullYear()
+const CURRENT_YEAR = new Date().getFullYear();
 
 const FOOTER_LINKS = [
-  { name: 'Services', href: '/services' },
-  { name: 'About', href: '/about' },
-  { name: 'Contact', href: '/contact' },
-]
+  { name: "Services", href: "/services" },
+  { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
+];
 
 export function Footer() {
   return (
@@ -28,8 +28,16 @@ export function Footer() {
               Agentack
             </Link>
             <p className="text-[#5A7068] text-[13px] leading-relaxed">
-              We build custom AI automation systems for mid-size businesses.
+              We're an AI agency helping ecommerce brands build AI workforces
+              that automate operations, increase efficiency, and accelerate
+              growth.
             </p>
+
+            <h3>
+              Email:{" "}
+              <a className="hover:text-green-hover" href="mailto:contact@agentack.co">contact@agentack.co</a>
+            </h3>
+            {/* <email href="mailto:contact@agentack.co">Send us an email</email> */}
           </div>
 
           {/* Col 2: Nav Links */}
@@ -85,5 +93,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

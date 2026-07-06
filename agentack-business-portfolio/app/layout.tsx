@@ -29,10 +29,11 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: {
     template: "%s | Agentack",
-    default: "Agentack - AI Automation for Growing Businesses",
+    default: "Agentack | AI Workforce for Ecommerce Stores",
   },
   description:
-    "We build custom AI automation systems for mid-size businesses. Eliminate manual work, scale operations, and free your team to focus on what matters.",
+    // "We build custom AI automation systems for mid-size businesses. Eliminate manual work, scale operations, and free your team to focus on what matters.",
+    "We build custom AI agents and intelligent automations that become your AI workforce which handles sales, support, operations, and repetitive tasks so your ecommerce business can scale faster",
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   ),
@@ -45,7 +46,7 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Agentack — AI Automation Agency",
+        alt: "Agentack | AI Workforce for Ecommerce Stores",
       },
     ],
   },

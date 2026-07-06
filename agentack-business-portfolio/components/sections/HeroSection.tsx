@@ -23,15 +23,16 @@ export function HeroSection({
   return (
     <section className="relative min-h-screen pt-[160px] pb-[120px] bg-gradient-to-br from-black-base via-[#001A0D] to-[#003320]">
       <div className="max-w-[800px] mx-auto px-[24px] md:px-[40px] lg:px-[80px] text-center">
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0 }}
         >
           <Badge variant="green" className="rounded-pill mb-4">
-            {eyebrow}
+             {eyebrow} 
+            eyebrow
           </Badge>
-        </motion.div>
+        </motion.div> */}
 
         <motion.h1
           initial={{ opacity: 0, y: 16 }}
