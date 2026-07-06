@@ -17,9 +17,9 @@ export function Footer() {
     >
       <div className="max-w-[1200px] mx-auto px-[24px] md:px-[40px] lg:px-[80px]">
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8">
           {/* Col 1: Logo + Tagline */}
-          <div>
+          <div className="flex flex-col gap-4">
             <Link
               href="/"
               className="text-green-primary font-display font-medium text-xl mb-3 inline-block hover:opacity-80 transition-opacity"
