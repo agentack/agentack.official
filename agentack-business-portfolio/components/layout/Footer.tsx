@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Linkedin } from "lucide-react";
+import { Facebook, Instagram, Linkedin, MapPin } from "lucide-react";
 
 const CURRENT_YEAR = new Date().getFullYear();
 
@@ -7,6 +7,7 @@ const FOOTER_LINKS = [
   { name: "Services", href: "/services" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
+  { name: "Our Customers", href: "/who-we-work-with" },
 ];
 
 export function Footer() {
@@ -15,29 +16,48 @@ export function Footer() {
       className="bg-black-3 border-t border-[#1A1A1A] py-12"
       role="contentinfo"
     >
-      <div className="max-w-[1200px] mx-auto px-[24px] md:px-[40px] lg:px-[80px]">
+      <div className="max-w-[1200px] flex flex-col gap-4 mx-auto px-[24px] md:px-[40px] lg:px-[80px]">
+        <Link
+          href="/"
+          className="text-green-primary font-display font-medium text-xl mb-3 inline-block hover:opacity-80 transition-opacity"
+          aria-label="Agentack Home"
+        >
+          Agentack
+        </Link>
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-8">
           {/* Col 1: Logo + Tagline */}
           <div className="flex flex-col gap-4">
-            <Link
+            {/* <Link
               href="/"
               className="text-green-primary font-display font-medium text-xl mb-3 inline-block hover:opacity-80 transition-opacity"
               aria-label="Agentack Home"
             >
               Agentack
-            </Link>
+            </Link> */}
             <p className="text-[#5A7068] text-[13px] leading-relaxed">
               We're an AI agency helping ecommerce brands build AI workforces
               that automate operations, increase efficiency, and accelerate
               growth.
             </p>
 
-            <h3>
-              Email:{" "}
-              <a className="hover:text-green-hover" href="mailto:contact@agentack.co">contact@agentack.co</a>
-            </h3>
-            {/* <email href="mailto:contact@agentack.co">Send us an email</email> */}
+            <div className="flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-green-primary shrink-0" />
+              <span className="text-sage-mid text-[13px]">
+                Karachi, Pakistan
+              </span>
+            </div>
+            <div>
+              <h3 className="text-sage-mid text-[16px]">
+                Email:{" "}
+                <a
+                  className="text-green-primary opacity-70 text-[16px] hover:text-green-hover hover:opacity-100 transition-colors"
+                  href="mailto:contact@agentack.co"
+                >
+                  contact@agentack.co
+                </a>
+              </h3>
+            </div>
           </div>
 
           {/* Col 2: Nav Links */}
@@ -57,7 +77,7 @@ export function Footer() {
           </nav>
 
           {/* Col 3: LinkedIn */}
-          <div>
+          <div className="flex flex-col gap-3">
             <a
               href="https://linkedin.com/company/agentack"
               target="_blank"
@@ -66,6 +86,26 @@ export function Footer() {
               aria-label="Follow us on LinkedIn"
             >
               <Linkedin className="w-5 h-5" />
+              <span className="text-[12px]">LinkedIn</span>
+            </a>
+            <a
+              href="https://www.facebook.com/share/1Cjm6YoyuR/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sage-mid hover:text-frost-white transition-colors inline-flex items-center gap-2"
+              aria-label="Follow us on LinkedIn"
+            >
+              <Facebook className="w-5 h-5" />
+              <span className="text-[12px]">LinkedIn</span>
+            </a>
+            <a
+              href="https://linkedin.com/company/agentack"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sage-mid hover:text-frost-white transition-colors inline-flex items-center gap-2"
+              aria-label="Follow us on LinkedIn"
+            >
+              <Instagram className="w-5 h-5" />
               <span className="text-[12px]">LinkedIn</span>
             </a>
           </div>

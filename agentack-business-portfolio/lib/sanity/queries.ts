@@ -43,3 +43,27 @@ export const faqsByPageQuery = `*[_type == "faq" && page == $page] | order(order
   question,
   answer
 }`
+
+export const icpsQuery = `*[_type == "icp"] | order(order asc) {
+  _id,
+  name,
+  slug,
+  tagline,
+  description,
+  icon,
+  order
+}`
+
+export const icpBySlugQuery = `*[_type == "icp" && slug.current == $slug][0] {
+  _id,
+  name,
+  slug,
+  tagline,
+  description,
+  icon,
+  heroHeadline,
+  heroSubtitle,
+  painPoints,
+  whatWeSolve,
+  outcomes
+}`

@@ -5,35 +5,40 @@ import Link from 'next/link'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
+import { client } from '@/sanity/lib/client'
+import { servicesQuery, icpsQuery } from '@/lib/sanity/queries'
 
-const SERVICES = [
-  {
-    name: 'Workflow Automation',
-    description: 'End-to-end process automation',
-    href: '/services/workflow-automation',
-  },
-  {
-    name: 'AI Integration',
-    description: 'Custom AI solutions',
-    href: '/services/ai-integration',
-  },
-  {
-    name: 'Reporting Automation',
-    description: 'Automated dashboards & reports',
-    href: '/services/reporting-automation',
-  },
-]
+interface NavService {
+  _id: string
+  name: string
+  tagline: string
+  slug: { current: string }
+}
+
+interface NavIcp {
+  _id: string
+  name: string
+  tagline: string
+  slug: { current: string }
+}
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false)
+  const [services, setServices] = useState<NavService[]>([])
+  const [icps, setIcps] = useState<NavIcp[]>([])
   const isMobile = useMediaQuery('(max-width: 767px)')
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    client.fetch<NavService[]>(servicesQuery).then(setServices)
+    client.fetch<NavIcp[]>(icpsQuery).then(setIcps)
   }, [])
 
   // Close mobile menu on escape key
@@ -102,31 +107,55 @@ export function Navbar() {
 
             {isServicesDropdownOpen && (
               <div
-                className="absolute top-full left-0 mt-1 bg-[#0D1A0D] border border-[#1E3020] rounded-lg py-2 min-w-[260px] shadow-lg"
+                className="absolute top-full left-0 mt-1 bg-[#0D1A0D] border border-[#1E3020] rounded-lg py-4 min-w-[500px] shadow-lg"
                 role="menu"
               >
-                {SERVICES.map((service) => (
-                  <Link
-                    key={service.name}
-                    href={service.href}
-                    className="block px-4 py-2.5 hover:bg-[rgba(0,255,136,0.05)] hover:text-green-primary transition-colors"
-                    role="menuitem"
-                  >
-                    <div className="text-[12px] text-frost-white font-medium">
-                      {service.name}
-                    </div>
-                    <div className="text-[11px] text-[#5A7068]">
-                      {service.description}
-                    </div>
-                  </Link>
-                ))}
-                <div className="border-t border-[#1E3020] mt-2 pt-2 px-4">
-                  <Link
-                    href="/services"
-                    className="text-[12px] text-[#00C46A] font-medium hover:text-green-primary transition-colors"
-                  >
-                    View all services →
-                  </Link>
+                <div className="grid grid-cols-2 gap-4 px-4">
+                  {/* Services Column */}
+                  <div>
+                    <p className="text-[10px] uppercase tracking-widest text-[#5A7068] font-medium mb-2 px-3">
+                      Services
+                    </p>
+                    {services.map((service) => (
+                      <Link
+                        key={service._id}
+                        href={`/services/${service.slug.current}`}
+                        className="block px-3 py-2 rounded-md hover:bg-[rgba(0,255,136,0.05)] hover:text-green-primary transition-colors"
+                        role="menuitem"
+                      >
+                        <div className="text-[12px] text-frost-white font-medium">
+                          {service.name}
+                        </div>
+                        {/* <div className="text-[11px] text-[#5A7068]">
+                          {service.tagline}
+                        </div> */}
+                      </Link>
+                    ))}
+                  </div>
+
+                  {/* Who We Work With Column */}
+                  <div>
+                    <p className="text-[10px] uppercase tracking-widest text-[#5A7068] font-medium mb-2 px-3">
+                      Who We Work With
+                    </p>
+                    {icps.map((icp) => (
+                      <Link
+                        key={icp._id}
+                        href={`/who-we-work-with/${icp.slug.current}`}
+                        className="block px-3 py-2 rounded-md hover:bg-[rgba(0,255,136,0.05)] hover:text-green-primary transition-colors"
+                        role="menuitem"
+                      >
+                        <div className="text-[12px] text-frost-white font-medium">
+                          {icp.name}
+                        </div>
+                        {/* {icp.tagline && (
+                          <div className="text-[11px] text-[#5A7068]">
+                            {icp.tagline}
+                          </div>
+                        )} */}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
             )}

@@ -3,7 +3,8 @@ import { service } from './service'
 import { siteSettings } from './siteSettings'
 import { teamMember } from './teamMember'
 import { faq } from './faq'
+import { icp } from './icp'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [service, siteSettings, teamMember, faq],
+  types: [service, siteSettings, teamMember, faq, icp],
 }

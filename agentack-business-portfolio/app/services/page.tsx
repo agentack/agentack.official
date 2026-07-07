@@ -8,7 +8,7 @@ import { ServicesCTAStrip } from '@/components/sections/ServicesCTAStrip'
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: 'Our Services — Agentack',
+    title: 'Our Services ',
     description:
       'Custom AI workflow automation, AI integration, and reporting automation services for mid-size businesses.',
   }

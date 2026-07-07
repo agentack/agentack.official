@@ -3,6 +3,7 @@
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { ServiceCard } from '@/components/ui/ServiceCard'
 import { motion } from 'framer-motion'
+import { getServiceIcon } from '@/lib/utils/icons'
 
 interface Service {
   _id: string
@@ -19,24 +20,9 @@ interface ServicesOverviewSectionProps {
   services: Service[]
 }
 
-// Dynamic icon renderer based on icon name from Sanity
 function renderIcon(iconName: string) {
-  // For now, render a placeholder - in production you'd map icon names to actual Lucide icons
-  return (
-    <svg
-      className="w-4 h-4"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M13 10V3L4 14h7v7l9-11h-7z"
-      />
-    </svg>
-  )
+  const Icon = getServiceIcon(iconName)
+  return <Icon className="w-4 h-4" />
 }
 
 export function ServicesOverviewSection({ services }: ServicesOverviewSectionProps) {

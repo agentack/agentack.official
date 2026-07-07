@@ -76,7 +76,7 @@ export default async function HomePage() {
       <ProcessSection steps={settings.processSteps || []} />
 
       {/* Section 7: Stats */}
-      <StatsSection stats={settings.stats || []} />
+      {/* <StatsSection stats={settings.stats || []} /> */}
 
       {/* Section 8: Why Us */}
       <WhyUsSection features={settings.differentiators || []} />
