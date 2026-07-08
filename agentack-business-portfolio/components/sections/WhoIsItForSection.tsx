@@ -1,5 +1,6 @@
 'use client'
 
+import { useLanguage } from '@/lib/i18n/context'
 import { CheckCircle } from 'lucide-react'
 
 interface WhoIsItForSectionProps {
@@ -9,8 +10,10 @@ interface WhoIsItForSectionProps {
 
 export function WhoIsItForSection({
   items,
-  statement = "Most businesses come to us when they're growing fast but their processes can't keep up.",
+  statement: _statement,
 }: WhoIsItForSectionProps) {
+  const { t } = useLanguage()
+  const statement = _statement ?? t.sections.whoIsItFor.defaultStatement
   return (
     <section className="bg-black-base py-[80px]">
       <div className="max-w-[1200px] mx-auto px-[24px] md:px-[40px] lg:px-[80px]">
@@ -18,7 +21,7 @@ export function WhoIsItForSection({
           {/* Left: Checklist */}
           <div>
             <h2 className="font-display font-medium text-[42px] leading-[1.2] tracking-[-0.01em] text-frost-white mb-6">
-              This is for you if...
+              {t.sections.whoIsItFor.heading}
             </h2>
             <ul className="space-y-4">
               {items.map((item, i) => (

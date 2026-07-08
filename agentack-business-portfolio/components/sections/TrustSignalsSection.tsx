@@ -1,14 +1,15 @@
 'use client'
 
+import { useLanguage } from '@/lib/i18n/context'
 import { CheckCircle } from 'lucide-react'
 
-const TRUST_SIGNALS = [
-  'We reply within 24 hours.',
-  'No sales pressure — just a real conversation.',
-  'Your information stays private, always.',
-]
-
 export function TrustSignalsSection() {
+  const { t } = useLanguage()
+  const TRUST_SIGNALS = [
+    t.sections.trustSignals.reply,
+    t.sections.trustSignals.noPressure,
+    t.sections.trustSignals.privacy,
+  ]
   return (
     <section className="bg-black-base py-[48px]">
       <div className="max-w-[1200px] mx-auto px-[24px] md:px-[40px] lg:px-[80px]">

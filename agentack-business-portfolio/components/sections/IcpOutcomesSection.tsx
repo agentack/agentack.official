@@ -1,3 +1,6 @@
+'use client'
+
+import { useLanguage } from '@/lib/i18n/context'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 
 interface IcpOutcomesSectionProps {
@@ -5,12 +8,13 @@ interface IcpOutcomesSectionProps {
 }
 
 export function IcpOutcomesSection({ outcomes }: IcpOutcomesSectionProps) {
+  const { t } = useLanguage()
   return (
     <section className="bg-black-base py-[100px]">
       <div className="max-w-[1200px] mx-auto px-[24px] md:px-[40px] lg:px-[80px]">
         <SectionHeading
-          eyebrow="Outcomes"
-          heading="What Success Looks Like"
+          eyebrow={t.sections.icpOutcomes.eyebrow}
+          heading={t.sections.icpOutcomes.heading}
           align="center"
         />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">

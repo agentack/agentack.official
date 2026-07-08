@@ -1,3 +1,6 @@
+'use client'
+
+import { useLanguage } from '@/lib/i18n/context'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Button } from '@/components/ui/Button'
 
@@ -8,10 +11,14 @@ interface AboutCTASectionProps {
 }
 
 export function AboutCTASection({
-  heading = "Want to work with us?",
-  subtext = "We're currently accepting new projects. Book a free strategy call to discuss your automation needs.",
-  ctaLabel = 'Book a free strategy call',
+  heading: _heading,
+  subtext: _subtext,
+  ctaLabel: _ctaLabel,
 }: AboutCTASectionProps) {
+  const { t } = useLanguage()
+  const heading = _heading ?? t.sections.aboutCta.heading
+  const subtext = _subtext ?? t.sections.aboutCta.subtext
+  const ctaLabel = _ctaLabel ?? t.sections.aboutCta.ctaLabel
   return (
     <section className="bg-black-2 py-[80px]">
       <div className="max-w-[600px] mx-auto px-[24px] md:px-[40px] lg:px-[80px] text-center">

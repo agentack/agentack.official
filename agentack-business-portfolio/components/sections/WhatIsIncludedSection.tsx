@@ -1,5 +1,6 @@
 'use client'
 
+import { useLanguage } from '@/lib/i18n/context'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { FeatureCard } from '@/components/ui/FeatureCard'
 import { motion } from 'framer-motion'
@@ -34,12 +35,13 @@ function renderIcon(iconName?: string) {
 }
 
 export function WhatIsIncludedSection({ features }: WhatIsIncludedSectionProps) {
+  const { t } = useLanguage()
   return (
     <section className="bg-black-2 py-[80px]">
       <div className="max-w-[1200px] mx-auto px-[24px] md:px-[40px] lg:px-[80px]">
         <SectionHeading
-          eyebrow="What's Included"
-          heading="Everything you need to succeed"
+          eyebrow={t.sections.whatIsIncluded.eyebrow}
+          heading={t.sections.whatIsIncluded.heading}
           align="left"
         />
 

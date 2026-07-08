@@ -1,5 +1,6 @@
 'use client'
 
+import { useLanguage } from '@/lib/i18n/context'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import { Badge } from './Badge'
@@ -14,6 +15,7 @@ interface ServiceCardProps {
 }
 
 export function ServiceCard({ icon, title, description, outcomes, href, timeline }: ServiceCardProps) {
+  const { t } = useLanguage()
   return (
     <div className="bg-surface-dark border border-border-dark rounded-card p-6 hover:border-sage-dark transition-all duration-150 group">
       {timeline && (
@@ -47,7 +49,7 @@ export function ServiceCard({ icon, title, description, outcomes, href, timeline
         href={href}
         className="inline-flex items-center gap-1 text-teal-primary font-medium text-[12px] border-b border-[rgba(0,229,204,0.4)] pb-[1px] mt-5 group-hover:text-[#00FFE5] group-hover:border-[rgba(0,255,229,0.6)] transition-colors"
       >
-        Learn more
+        {t.ui.learnMore}
         <ArrowRight className="w-3 h-3" />
       </Link>
     </div>

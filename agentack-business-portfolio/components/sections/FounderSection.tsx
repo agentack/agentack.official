@@ -1,3 +1,6 @@
+'use client'
+
+import { useLanguage } from '@/lib/i18n/context'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -18,6 +21,7 @@ interface FounderSectionProps {
 }
 
 export function FounderSection({ founder }: FounderSectionProps) {
+  const { t } = useLanguage()
   return (
     <section className="bg-black-base py-[100px]">
       <div className="max-w-[1200px] mx-auto px-[24px] md:px-[40px] lg:px-[80px]">
@@ -34,7 +38,7 @@ export function FounderSection({ founder }: FounderSectionProps) {
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-surface-dark text-sage-mid">
-                <span className="text-sm">Photo coming soon</span>
+                <span className="text-sm">{t.sections.founder.photoComingSoon}</span>
               </div>
             )}
           </div>
@@ -57,7 +61,7 @@ export function FounderSection({ founder }: FounderSectionProps) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1 text-teal-primary text-[14px] font-medium underline underline-offset-[3px] hover:text-[#00FFE5] transition-colors"
               >
-                Connect on LinkedIn →
+                {t.sections.founder.connectOnLinkedin}
               </Link>
             )}
           </div>

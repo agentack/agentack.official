@@ -4,31 +4,42 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { useLanguage } from '@/lib/i18n/context'
 import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
 import { Button } from '@/components/ui/Button'
 
-const formSchema = z.object({
+const formSchema = (nameMin: string, nameMax: string, companyRequired: string, companyMax: string, emailInvalid: string, messageMin: string, messageMax: string) => z.object({
   name: z
     .string()
-    .min(2, 'Name must be at least 2 characters')
-    .max(100, 'Name must be less than 100 characters'),
+    .min(2, nameMin)
+    .max(100, nameMax),
   company: z
     .string()
-    .min(1, 'Company is required')
-    .max(100, 'Company must be less than 100 characters'),
+    .min(1, companyRequired)
+    .max(100, companyMax),
   email: z
     .string()
-    .email('Please enter a valid email address'),
+    .email(emailInvalid),
   message: z
     .string()
-    .min(10, 'Message must be at least 10 characters')
-    .max(2000, 'Message must be less than 2000 characters'),
+    .min(10, messageMin)
+    .max(2000, messageMax),
 })
 
-type FormData = z.infer<typeof formSchema>
+type FormData = z.infer<ReturnType<typeof formSchema>>
 
 export function ContactFormSection() {
+  const { t } = useLanguage()
+  const schema = formSchema(
+    t.sections.contactForm.nameMin,
+    t.sections.contactForm.nameMax,
+    t.sections.contactForm.companyRequired,
+    t.sections.contactForm.companyMax,
+    t.sections.contactForm.emailInvalid,
+    t.sections.contactForm.messageMin,
+    t.sections.contactForm.messageMax,
+  )
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -39,7 +50,7 @@ export function ContactFormSection() {
     formState: { errors },
     reset,
   } = useForm<FormData>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(schema),
   })
 
   const onSubmit = async (data: FormData) => {
@@ -59,10 +70,10 @@ export function ContactFormSection() {
         setIsSuccess(true)
         reset()
       } else {
-        setError(result.message || 'Something went wrong. Please try again.')
+        setError(result.message || t.sections.contactForm.errorGeneric)
       }
     } catch (err) {
-      setError('Network error. Please check your connection and try again.')
+      setError(t.sections.contactForm.errorNetwork)
     } finally {
       setIsSubmitting(false)
     }
@@ -89,10 +100,10 @@ export function ContactFormSection() {
               </svg>
             </div>
             <h3 className="font-display font-medium text-[28px] leading-[1.2] text-frost-white mb-4">
-              Message Sent
+              {t.sections.contactForm.successHeading}
             </h3>
             <p className="font-body font-normal text-[16px] leading-[1.7] text-sage-mid mb-8">
-              We'll get back to you within 24 hours.
+              {t.sections.contactForm.successSubtext}
             </p>
             <Button
               variant="section-cta"
@@ -101,7 +112,7 @@ export function ContactFormSection() {
                 reset()
               }}
             >
-              Send another message
+              {t.sections.contactForm.sendAnother}
             </Button>
           </div>
         </div>
@@ -116,7 +127,7 @@ export function ContactFormSection() {
           {/* Left: Form */}
           <div className="lg:col-span-3">
             <h3 className="font-display font-medium text-[20px] leading-[1.4] text-frost-white mb-6">
-              Send us a message
+              {t.sections.contactForm.heading}
             </h3>
 
             {error && (
@@ -128,33 +139,33 @@ export function ContactFormSection() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
               <Input
                 id="name"
-                label="Name"
-                placeholder="John Doe"
+                label={t.sections.contactForm.nameLabel}
+                placeholder={t.sections.contactForm.namePlaceholder}
                 error={errors.name?.message}
                 register={register('name')}
               />
 
               <Input
                 id="company"
-                label="Company"
-                placeholder="Acme Inc."
+                label={t.sections.contactForm.companyLabel}
+                placeholder={t.sections.contactForm.companyPlaceholder}
                 error={errors.company?.message}
                 register={register('company')}
               />
 
               <Input
                 id="email"
-                label="Email"
+                label={t.sections.contactForm.emailLabel}
                 type="email"
-                placeholder="john@company.com"
+                placeholder={t.sections.contactForm.emailPlaceholder}
                 error={errors.email?.message}
                 register={register('email')}
               />
 
               <Textarea
                 id="message"
-                label="Message"
-                placeholder="What's your biggest operational bottleneck?"
+                label={t.sections.contactForm.messageLabel}
+                placeholder={t.sections.contactForm.messagePlaceholder}
                 rows={5}
                 error={errors.message?.message}
                 register={register('message')}
@@ -165,7 +176,7 @@ export function ContactFormSection() {
                 variant="form-submit"
                 isLoading={isSubmitting}
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                {isSubmitting ? t.sections.contactForm.sending : t.sections.contactForm.send}
               </Button>
             </form>
           </div>
@@ -173,14 +184,14 @@ export function ContactFormSection() {
           {/* Right: Cal.com Embed */}
           <div className="lg:col-span-2 border-l border-[#1E2E26] pl-0 lg:pl-[60px]">
             <h3 className="font-body font-medium text-[16px] text-sage-mid mb-4">
-              Or pick a time directly
+              {t.sections.contactForm.orPickTime}
             </h3>
             <div className="rounded-card border border-border-dark overflow-hidden">
               <iframe
                 src={process.env.NEXT_PUBLIC_CAL_LINK || 'https://cal.com'}
                 className="w-full h-[600px]"
                 loading="lazy"
-                title="Schedule a call"
+                title={t.ui.scheduleCall}
               />
             </div>
           </div>

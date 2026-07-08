@@ -1,5 +1,6 @@
 'use client'
 
+import { useLanguage } from '@/lib/i18n/context'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { FeatureCard } from '@/components/ui/FeatureCard'
 import { motion } from 'framer-motion'
@@ -35,13 +36,14 @@ function renderIcon(iconName: string) {
 }
 
 export function WhyUsSection({ features }: WhyUsSectionProps) {
+  const { t } = useLanguage()
   return (
     <section className="bg-black-2 py-[100px]">
       <div className="max-w-[1200px] mx-auto px-[24px] md:px-[40px] lg:px-[80px]">
         <SectionHeading
-          eyebrow="Why Us"
-          heading="What Makes Us Different"
-          subtitle="We don't just build automation. We redesign your workflows from the ground up."
+          eyebrow={t.sections.whyUs.eyebrow}
+          heading={t.sections.whyUs.heading}
+          subtitle={t.sections.whyUs.subtitle}
           align="left"
         />
 

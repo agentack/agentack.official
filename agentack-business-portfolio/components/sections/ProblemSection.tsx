@@ -1,3 +1,6 @@
+'use client'
+
+import { useLanguage } from '@/lib/i18n/context'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 
 interface ProblemSectionProps {
@@ -15,6 +18,7 @@ export function ProblemSection({
   statement,
   subStatement,
 }: ProblemSectionProps) {
+  const { t } = useLanguage()
   return (
     <section className="bg-black-base py-[100px]">
       <div className="max-w-[1200px] mx-auto px-[24px] md:px-[40px] lg:px-[80px]">
@@ -22,7 +26,7 @@ export function ProblemSection({
           {/* Left Column: Heading + Pain Points */}
           <div>
             <SectionHeading
-              eyebrow="The Problem"
+              eyebrow={t.sections.problem.eyebrow}
               heading={heading}
               subtitle={subtitle}
               align="left"

@@ -5,6 +5,8 @@ import Link from 'next/link'
 import { Menu, X, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { useMediaQuery } from '@/lib/hooks/useMediaQuery'
+import { useLanguage } from '@/lib/i18n/context'
+import { type Locale, locales } from '@/lib/i18n/config'
 import { client } from '@/sanity/lib/client'
 import { servicesQuery, icpsQuery } from '@/lib/sanity/queries'
 
@@ -29,6 +31,12 @@ export function Navbar() {
   const [services, setServices] = useState<NavService[]>([])
   const [icps, setIcps] = useState<NavIcp[]>([])
   const isMobile = useMediaQuery('(max-width: 767px)')
+  const { t, locale, setLocale } = useLanguage()
+
+  const cycleLocale = () => {
+    const idx = locales.indexOf(locale)
+    setLocale(locales[(idx + 1) % locales.length])
+  }
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20)
@@ -72,16 +80,16 @@ export function Navbar() {
         ${isScrolled ? 'backdrop-blur-md border-b border-[#1A1A1A]' : ''}
       `}
       role="navigation"
-      aria-label="Main navigation"
+      aria-label={t.nav.mainNavigation}
     >
       <div className="max-w-[1200px] mx-auto px-[24px] md:px-[40px] lg:px-[80px] h-full flex justify-between items-center">
         {/* Logo */}
         <Link
           href="/"
           className="text-green-primary font-display font-medium text-xl hover:opacity-80 transition-opacity"
-          aria-label="Agentack Home"
+          aria-label={t.nav.agentackHome}
         >
-          Agentack
+          {t.nav.agentack}
         </Link>
 
         {/* Desktop Nav */}
@@ -97,7 +105,7 @@ export function Navbar() {
               aria-expanded={isServicesDropdownOpen}
               aria-haspopup="true"
             >
-              Services
+              {t.nav.services}
               <ChevronDown
                 className={`w-3 h-3 transition-transform duration-200 ${
                   isServicesDropdownOpen ? 'rotate-180' : ''
@@ -114,7 +122,7 @@ export function Navbar() {
                   {/* Services Column */}
                   <div>
                     <p className="text-[10px] uppercase tracking-widest text-[#5A7068] font-medium mb-2 px-3">
-                      Services
+                      {t.nav.services}
                     </p>
                     {services.map((service) => (
                       <Link
@@ -136,7 +144,7 @@ export function Navbar() {
                   {/* Who We Work With Column */}
                   <div>
                     <p className="text-[10px] uppercase tracking-widest text-[#5A7068] font-medium mb-2 px-3">
-                      Who We Work With
+                      {t.nav.whoWeWorkWith}
                     </p>
                     {icps.map((icp) => (
                       <Link
@@ -162,21 +170,36 @@ export function Navbar() {
           </div>
 
           <Link
+            href="/gaming-animation"
+            className="text-sage-mid text-[12px] font-normal hover:text-frost-white transition-colors"
+          >
+            Gaming &amp; Animation
+          </Link>
+          <Link
             href="/about"
             className="text-sage-mid text-[12px] font-normal hover:text-frost-white transition-colors"
           >
-            About
+            {t.nav.about}
           </Link>
           <Link
             href="/contact"
             className="text-sage-mid text-[12px] font-normal hover:text-frost-white transition-colors"
           >
-            Contact
+            {t.nav.contact}
           </Link>
+
+          {/* Language Toggle */}
+          <button
+            onClick={cycleLocale}
+            className="text-[11px] font-medium text-sage-mid hover:text-green-primary transition-colors border border-[#1E3020] rounded-btn-nav px-2 py-1"
+            aria-label={`Switch language to ${locale === 'en' ? 'Arabic' : 'English'}`}
+          >
+            {locale === 'en' ? 'AR' : 'EN'}
+          </button>
 
           {/* Navbar CTA */}
           <Button variant="navbar-cta" href="/contact">
-            Book a call
+            {t.nav.bookCall}
           </Button>
         </div>
 
@@ -186,7 +209,7 @@ export function Navbar() {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-expanded={isMobileMenuOpen}
           aria-controls="mobile-menu"
-          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-label={isMobileMenuOpen ? t.nav.closeMenu : t.nav.openMenu}
         >
           {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
@@ -204,30 +227,45 @@ export function Navbar() {
             className="text-frost-white text-[14px] hover:text-green-primary transition-colors"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Services
+            {t.nav.services}
+          </Link>
+          <Link
+            href="/gaming-animation"
+            className="text-frost-white text-[14px] hover:text-green-primary transition-colors"
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Gaming &amp; Animation
           </Link>
           <Link
             href="/about"
             className="text-frost-white text-[14px] hover:text-green-primary transition-colors"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            About
+            {t.nav.about}
           </Link>
           <Link
             href="/contact"
             className="text-frost-white text-[14px] hover:text-green-primary transition-colors"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Contact
+            {t.nav.contact}
           </Link>
-          <Button
-            variant="hero-cta"
-            href="/contact"
-            className="w-full"
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Book a call
-          </Button>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => { cycleLocale(); setIsMobileMenuOpen(false) }}
+              className="text-[11px] font-medium text-sage-mid hover:text-green-primary transition-colors border border-[#1E3020] rounded-btn-nav px-2 py-1"
+            >
+              {locale === 'en' ? 'AR' : 'EN'}
+            </button>
+            <Button
+              variant="hero-cta"
+              href="/contact"
+              className="flex-1"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              {t.nav.bookCall}
+            </Button>
+          </div>
         </div>
       )}
     </nav>

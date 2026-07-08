@@ -1,3 +1,7 @@
+'use client'
+
+import { useLanguage } from '@/lib/i18n/context'
+
 interface StepCardProps {
   step: number
   title: string
@@ -6,11 +10,12 @@ interface StepCardProps {
 }
 
 export function StepCard({ step, title, description, isLast }: StepCardProps) {
+  const { t } = useLanguage()
   return (
     <div className="relative">
       <div className="border-l-2 border-green-primary rounded-r-lg bg-transparent px-5 py-4">
         <div className="font-mono font-normal text-[11px] text-sage-dark">
-          STEP {step}
+          {t.ui.step} {step}
         </div>
         <h3 className="font-body font-medium text-[15px] text-frost-white mt-1">
           {title}

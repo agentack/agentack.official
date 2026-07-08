@@ -1,5 +1,6 @@
 'use client'
 
+import { useLanguage } from '@/lib/i18n/context'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { ServiceCard } from '@/components/ui/ServiceCard'
 import { motion } from 'framer-motion'
@@ -26,13 +27,14 @@ function renderIcon(iconName: string) {
 }
 
 export function ServicesOverviewSection({ services }: ServicesOverviewSectionProps) {
+  const { t } = useLanguage()
   return (
     <section className="bg-black-2 py-[100px]">
       <div className="max-w-[1200px] mx-auto px-[24px] md:px-[40px] lg:px-[80px]">
         <SectionHeading
-          eyebrow="Our Services"
-          heading="What We Build"
-          subtitle="Custom AI automation systems designed for your specific workflows."
+          eyebrow={t.sections.servicesOverview.eyebrow}
+          heading={t.sections.servicesOverview.heading}
+          subtitle={t.sections.servicesOverview.subtitle}
           align="center"
         />
 

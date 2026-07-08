@@ -1,3 +1,6 @@
+'use client'
+
+import { useLanguage } from '@/lib/i18n/context'
 import Link from 'next/link'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Button } from '@/components/ui/Button'
@@ -10,14 +13,18 @@ interface ServiceCTASectionProps {
 
 export function ServiceCTASection({
   serviceName,
-  ctaLabel = 'Book a free strategy call',
-  subtext = 'Discuss your specific needs with our team.',
+  ctaLabel: _ctaLabel,
+  subtext: _subtext,
 }: ServiceCTASectionProps) {
+  const { t } = useLanguage()
+  const ctaLabel = _ctaLabel ?? t.sections.serviceCta.ctaLabel
+  const subtext = _subtext ?? t.sections.serviceCta.subtext
+
   return (
     <section className="bg-black-base py-[100px]">
       <div className="max-w-[600px] mx-auto px-[24px] md:px-[40px] lg:px-[80px] text-center">
         <SectionHeading
-          heading={`Ready to automate ${serviceName.toLowerCase()}?`}
+          heading={t.sections.serviceCta.heading.replace('{name}', serviceName.toLowerCase())}
           subtitle={subtext}
           align="center"
         />
@@ -32,7 +39,7 @@ export function ServiceCTASection({
           href="/services"
           className="inline-block mt-6 text-teal-primary text-[12px] font-medium hover:text-[#00FFE5] transition-colors"
         >
-          ← Back to all services
+          {t.sections.serviceCta.backLink}
         </Link>
       </div>
     </section>

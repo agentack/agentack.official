@@ -54,6 +54,28 @@ export const icpsQuery = `*[_type == "icp"] | order(order asc) {
   order
 }`
 
+export const gamingAnimationQuery = `*[_type == "gamingAnimation"][0] {
+  name,
+  heroHeadline,
+  heroSubtitle,
+  heroPrimaryCta,
+  heroSecondaryCta,
+  services,
+  industries,
+  toolsTitle,
+  toolGroups,
+  processTitle,
+  processSteps,
+  whyTitle,
+  whyItems,
+  faqs,
+  bridgeHeadline,
+  bridgeText,
+  ctaHeadline,
+  ctaSubtext,
+  ctaLabel
+}`
+
 export const icpBySlugQuery = `*[_type == "icp" && slug.current == $slug][0] {
   _id,
   name,

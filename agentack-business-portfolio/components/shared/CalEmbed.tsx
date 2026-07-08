@@ -1,11 +1,14 @@
 'use client'
 
+import { useLanguage } from '@/lib/i18n/context'
+
 interface CalEmbedProps {
   calLink?: string
   className?: string
 }
 
 export function CalEmbed({ calLink, className }: CalEmbedProps) {
+  const { t } = useLanguage()
   const embedUrl = calLink || process.env.NEXT_PUBLIC_CAL_LINK || 'https://cal.com'
 
   return (
@@ -13,7 +16,7 @@ export function CalEmbed({ calLink, className }: CalEmbedProps) {
       <iframe
         src={embedUrl}
         className="w-full h-[600px] rounded-card border border-border-dark"
-        title="Schedule a call"
+        title={t.ui.scheduleCall}
         loading="lazy"
         style={{ background: 'transparent' }}
       />

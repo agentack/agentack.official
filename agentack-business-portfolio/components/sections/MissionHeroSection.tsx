@@ -1,12 +1,19 @@
+'use client'
+
+import { useLanguage } from '@/lib/i18n/context'
+
 interface MissionHeroSectionProps {
   heading?: string
   subtitle?: string
 }
 
 export function MissionHeroSection({
-  heading = 'About Us',
-  subtitle = "We believe most business processes shouldn't require humans. Our mission is to automate the mundane so your team can focus on what truly matters.",
+  heading: _heading,
+  subtitle: _subtitle,
 }: MissionHeroSectionProps) {
+  const { t } = useLanguage()
+  const heading = _heading ?? t.sections.missionHero.heading
+  const subtitle = _subtitle ?? t.sections.missionHero.subtitle
   return (
     <section className="bg-black-base pt-[140px] pb-[80px]">
       <div className="max-w-[800px] mx-auto px-[24px] md:px-[40px] lg:px-[80px] text-center">

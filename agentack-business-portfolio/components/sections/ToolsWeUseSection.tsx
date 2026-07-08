@@ -1,3 +1,6 @@
+'use client'
+
+import { useLanguage } from '@/lib/i18n/context'
 import { LogoStrip } from '@/components/ui/LogoStrip'
 
 interface ToolsWeUseSectionProps {
@@ -7,8 +10,10 @@ interface ToolsWeUseSectionProps {
 
 export function ToolsWeUseSection({
   tools = [],
-  label = 'Tools we use',
+  label: _label,
 }: ToolsWeUseSectionProps) {
+  const { t } = useLanguage()
+  const label = _label ?? t.sections.toolsWeUse.label
   const logos = tools.map((name) => ({ name }))
 
   if (logos.length === 0) {

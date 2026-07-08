@@ -1,5 +1,6 @@
 'use client'
 
+import { useLanguage } from '@/lib/i18n/context'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Badge } from '@/components/ui/Badge'
@@ -11,6 +12,7 @@ interface IcpHeroSectionProps {
 }
 
 export function IcpHeroSection({ name, headline, subtitle }: IcpHeroSectionProps) {
+  const { t } = useLanguage()
   return (
     <section className="relative pt-[140px] pb-[80px] bg-gradient-to-br from-black-base via-[#001A0D] to-black-base">
       <div className="max-w-[1200px] mx-auto px-[24px] md:px-[40px] lg:px-[80px]">
@@ -18,7 +20,7 @@ export function IcpHeroSection({ name, headline, subtitle }: IcpHeroSectionProps
           href="/services"
           className="inline-flex items-center gap-1 text-teal-primary text-[12px] font-medium mb-4 hover:text-[#00FFE5] transition-colors"
         >
-          ← All services
+          {t.sections.icpHero.allServices}
         </Link>
 
         <motion.div

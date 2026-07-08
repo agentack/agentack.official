@@ -1,9 +1,9 @@
 import { Metadata } from 'next'
-import { client } from '@/lib/sanity/client'
-import { siteSettingsQuery, teamMembersQuery } from '@/lib/sanity/queries'
+// import { client } from '@/lib/sanity/client'
+// import { siteSettingsQuery, teamMembersQuery } from '@/lib/sanity/queries'
 import { MissionHeroSection } from '@/components/sections/MissionHeroSection'
 import { OurApproachSection } from '@/components/sections/OurApproachSection'
-import { FounderSection } from '@/components/sections/FounderSection'
+// import { FounderSection } from '@/components/sections/FounderSection'
 import { AboutCTASection } from '@/components/sections/AboutCTASection'
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -14,19 +14,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const [settings, teamMembers] = await Promise.all([
-    client.fetch(siteSettingsQuery),
-    client.fetch(teamMembersQuery),
-  ])
-
-  // Get the first team member as founder (or use a dedicated founder query in production)
-  const founder = teamMembers?.[0] || {
-    name: settings?.agencyName || 'Our Team',
-    role: 'Founder',
-    bio: settings?.tagline || 'We build custom AI automation systems for mid-size businesses.',
-    photo: null,
-    linkedinUrl: settings?.linkedinUrl,
-  }
+  // Founder section commented out — will be added later
+  // const [settings, teamMembers] = await Promise.all([
+  //   client.fetch(siteSettingsQuery),
+  //   client.fetch(teamMembersQuery),
+  // ])
 
   return (
     <>
@@ -41,8 +33,8 @@ export default async function AboutPage() {
       {/* Section 3: Our Approach */}
       <OurApproachSection />
 
-      {/* Section 4: Founder */}
-      <FounderSection founder={founder} />
+      {/* Section 4: Founder — commented out for now */}
+      {/* <FounderSection founder={founder} /> */}
 
       {/* Section 5: CTA */}
       <AboutCTASection />

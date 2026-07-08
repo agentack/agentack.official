@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Syne, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { LanguageProvider } from "@/lib/i18n/context";
+import { HtmlLangSetter } from "@/components/shared/HtmlLangSetter";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import Script from "next/script";
@@ -83,9 +85,12 @@ export default function RootLayout({
       <body
         className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} bg-black-base text-frost-white antialiased`}
       >
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <LanguageProvider>
+          <HtmlLangSetter />
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

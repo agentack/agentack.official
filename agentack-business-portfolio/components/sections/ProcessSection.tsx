@@ -1,3 +1,6 @@
+'use client'
+
+import { useLanguage } from '@/lib/i18n/context'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { StepCard } from '@/components/ui/StepCard'
 
@@ -12,13 +15,14 @@ interface ProcessSectionProps {
 }
 
 export function ProcessSection({ steps }: ProcessSectionProps) {
+  const { t } = useLanguage()
   return (
     <section className="bg-black-base py-[100px]">
       <div className="max-w-[1200px] mx-auto px-[24px] md:px-[40px] lg:px-[80px]">
         <SectionHeading
-          eyebrow="Our Process"
-          heading="How We Work"
-          subtitle="A proven framework for delivering automation that works."
+          eyebrow={t.sections.process.eyebrow}
+          heading={t.sections.process.heading}
+          subtitle={t.sections.process.subtitle}
           align="left"
         />
 

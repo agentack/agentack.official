@@ -15,8 +15,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: settings?.agencyName
-      ? `${settings.agencyName} — AI Automation for Growing Businesses`
-      : 'Agentack — AI Automation for Growing Businesses',
+      ? `${settings.agencyName} | AI Workforce for Ecommerce Stores`
+      : 'Agentack | AI Workforce for Ecommerce Stores',
     description:
       settings?.seoDefaultDescription ||
       'We build custom AI automation systems for mid-size businesses. Eliminate manual work, scale operations, and free your team to focus on what matters.',
